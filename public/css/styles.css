@@ -127,6 +127,19 @@ img+em{
   color: #cd6133;
 }
 
+/*Footer*/
+
+#footer{
+  padding: 2% 0;
+}
+.footer-icons{
+  color: wheat;
+  margin: 1%;
+}
+.footer-icons:hover{
+  color: #cd6133;
+}
+
 
 .p-t-5{
   padding-top: 5rem;
