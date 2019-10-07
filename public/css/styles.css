@@ -1,0 +1,75 @@
+/*Tag*/
+
+body{
+  text-align: center;
+}
+
+/*----------------------------------------------------------------------------------*/
+
+.container-fluid{
+  padding: 0 0;
+}
+
+.colored-section {
+  background-color: wheat;
+  color: white;
+}
+
+.white-section {
+  background-color: white;
+}
+/*------------------------------------------------------------------------------------*/
+/*Navbar*/
+
+.navbar {
+  padding: 0 2rem 3rem;
+  color: #cd6133;
+}
+.navbar-brand {
+  font-weight: 900;
+  font-size: 2.5rem;
+}
+.nav-item {
+  padding: 0 18px;
+}
+.nav-link {
+  font-size: 1.2rem;
+}
+/*-------------------------------------------------------------------------------------------*/
+
+/*Title*/
+.big-heading {
+  color: #cd6133;
+  padding: 4rem;
+  font-size: 3.5rem;
+  line-height: 1.5;
+}
+
+.cust-btn{
+  color: #cd6133;
+  border-color: #cd6133;
+}
+
+/*----------Modified for the search box-----------------*/
+.form-control::-webkit-input-placeholder {
+  color: #cd6133;
+}
+.form-control:focus {
+  border-color: #cd6133;
+  box-shadow: 0 0 0 0.2rem rgba(255, 121, 63, 1);
+}
+/*-----------------------------------------------------*/
+.btn-margin {
+  margin: 5% 3% 5% 0;
+}
+
+.down-btn:hover{
+  color: white;
+  background-color: #cd6133;
+}
+
+.title-img {
+  right: 10%;
+  width: 100%;
+}
+
