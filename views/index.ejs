@@ -1,6 +1,6 @@
 <%- include("partials/header"); %>
 
-
+<!--Title-->
 <section class="colored-section">
 
   <div class="container-fluid">
@@ -54,7 +54,52 @@
   </div>
 </section>
 
-<section class="white-section">
+<!--Features-->
+<section class="white-section" id="features">
+
+  <div class="row container-fluid">
+    <div class="feature-box col-lg-4">
+      <i class="fas fa-check-circle feature-icon fa-4x"></i>
+      <h3 class="featute-title">Reader Goal</h3>
+      <p>Weekly, Monthly, Yearly Goals are coming soon!</p>
+    </div>
+
+    <div class="feature-box col-lg-4">
+      <i class="fas fa-bullseye feature-icon fa-4x"></i>
+      <h3 class="featute-title">Social Media</h3>
+      <p>Sign in or Sign up with your existing Facebook or Google account</p>
+    </div>
+
+    <div class="feature-box col-lg-4">
+      <i class="fas fa-heart feature-icon fa-4x"></i>
+      <h3 class="featute-title">True Companion</h3>
+      <p>Find the love of your leisure time</p>
+    </div>
+  </div>
+
+</section>
+<!--Quotes-->
+<section class="colored-section">
+  <div class="carousel slide p-t-5" data-ride="carousel">
+    <div class="carousel-inner">
+      <div class="carousel-item active container-fluid">
+        <h2 class="quote-text">"If you only read the books that everyone else is reading, you can only think wht everyone else is thinking."</h2>
+        <img class="quote-img" src="images/murakami.jpeg" alt="murakami pic">
+        <em>Haruki Murakami, Japan</em>
+      </div>
+      <div class="carousel-item container-fluid">
+        <h2 class="quote-text">"All we have to decide is what to do with the time that is given to us."</h2>
+        <img class="quote-img" src="images/tolkien.jpeg" alt="tolkien">
+        <em>John Ronald Reuel Tolkien, South Africa</em>
+      </div>
+    </div>
+    <a class="carousel-control-prev" href="#testimonial-carousel" role="button" data-slide="prev">
+      <span class="carousel-control-prev-icon"></span>
+    </a>
+    <a class="carousel-control-next" href="#testimonial-carousel" role="button" data-slide="next">
+      <span class="carousel-control-next-icon"></span>
+    </a>
+  </div>
 
 </section>
 <%- include("partials/footer"); %>

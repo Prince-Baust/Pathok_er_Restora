@@ -4,10 +4,21 @@ body{
   text-align: center;
 }
 
+a{
+  color: #cd6133;
+}
+a:hover{
+  color: brown;
+}
+p{
+  color: #8f8f8f;
+  font-family: Ubuntu;
+}
+
 /*----------------------------------------------------------------------------------*/
 
 .container-fluid{
-  padding: 0 0;
+  padding: 0 10%;
 }
 
 .colored-section {
@@ -50,6 +61,11 @@ body{
   border-color: #cd6133;
 }
 
+.cust-btn:hover{
+  background-color: #cd6133;
+  color: white;
+}
+
 /*----------Modified for the search box-----------------*/
 .form-control::-webkit-input-placeholder {
   color: #cd6133;
@@ -69,7 +85,49 @@ body{
 }
 
 .title-img {
-  right: 10%;
+  position: absolute;
+  right: 0%;
+  transform: rotate(15deg);
   width: 100%;
 }
+/*-------------------Feature*-------------------/*/
 
+#features {
+  position: relative;
+}
+
+.feature-box {
+  padding: 8%;
+}
+
+.featute-title {
+  font-size: 1.5rem;
+  color: #cd6133;
+}
+
+.feature-icon {
+  color: #cd6133;
+  margin-bottom: 1rem;
+}
+
+/*--------------------Quote--------------------*/
+.quote-img {
+  border-radius: 100%;
+  margin: 20px;
+  width: 10%;
+}
+
+.quote-text {
+  color: #cd6133;
+  font-size: 3rem;
+  line-height: 1.5;
+}
+
+img+em{
+  color: #cd6133;
+}
+
+
+.p-t-5{
+  padding-top: 5rem;
+}
