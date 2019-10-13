@@ -21,7 +21,7 @@ app.get("/signup", function (req,res) {
 });
 
 app.get('/home', function (req, res) {
-   res.render("home");
+   res.render("home", {styles: ['home.css', 'navbar_and_footer.css']});
 });
 
 app.listen(3000, function () {
