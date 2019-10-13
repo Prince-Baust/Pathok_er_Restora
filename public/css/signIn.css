@@ -1,6 +1,4 @@
 body {
-  /*display: flex;*/
-  /*-ms-flex-align: center;*/
   text-align: center;
   background-color: wheat;
 }
@@ -31,9 +29,12 @@ body {
   border-bottom-left-radius: 0;
 }
 .form-signin input[type="password"] {
-  margin-bottom: 10px;
   border-top-left-radius: 0;
   border-top-right-radius: 0;
+}
+
+.form-signin input[type= "checkbox"]{
+  margin-top: 10px;
 }
 
 .form-control::-webkit-input-placeholder {
@@ -42,6 +43,13 @@ body {
 .form-control:focus {
   border-color: #cd6133;
   box-shadow: 0 0 0 0.2rem rgba(255, 121, 63, 1);
+}
+
+.signIn-img{
+  position: absolute;
+  right: 48%;
+  top: 18%;
+  transform: rotate(15deg);
 }
 
 .cust-btn{

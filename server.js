@@ -16,6 +16,10 @@ app.get("/signin", function (req,res) {
    res.render("signIn", {styles: ['signIn.css', 'navbar_and_footer.css']});
 });
 
+app.get("/signup", function (req,res) {
+    res.render("signUp", {styles: ['signIn.css', 'navbar_and_footer.css']});
+});
+
 app.get('/home', function (req, res) {
    res.render("home");
 });
