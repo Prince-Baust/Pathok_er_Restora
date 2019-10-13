@@ -1,18 +1,5 @@
-/*Tag*/
-
 body{
   text-align: center;
-}
-
-a{
-  color: #cd6133;
-}
-a:hover{
-  color: brown;
-}
-p{
-  color: #8f8f8f;
-  font-family: Ubuntu;
 }
 
 /*----------------------------------------------------------------------------------*/
@@ -29,23 +16,7 @@ p{
 .white-section {
   background-color: white;
 }
-/*------------------------------------------------------------------------------------*/
-/*Navbar*/
 
-.navbar {
-  padding: 0 2rem 3rem;
-  color: #cd6133;
-}
-.navbar-brand {
-  font-weight: 900;
-  font-size: 2.5rem;
-}
-.nav-item {
-  padding: 0 18px;
-}
-.nav-link {
-  font-size: 1.2rem;
-}
 /*-------------------------------------------------------------------------------------------*/
 
 /*Title*/
@@ -100,14 +71,19 @@ p{
   padding: 8%;
 }
 
+.feature-icon {
+  color: #cd6133;
+  margin-bottom: 1rem;
+}
+
 .featute-title {
   font-size: 1.5rem;
   color: #cd6133;
 }
 
-.feature-icon {
-  color: #cd6133;
-  margin-bottom: 1rem;
+.feature-text{
+  color: #8f8f8f;
+  font-family: Ubuntu;
 }
 
 /*--------------------Quote--------------------*/
@@ -126,20 +102,6 @@ p{
 img+em{
   color: #cd6133;
 }
-
-/*Footer*/
-
-#footer{
-  padding: 2% 0;
-}
-.footer-icons{
-  color: wheat;
-  margin: 1%;
-}
-.footer-icons:hover{
-  color: #cd6133;
-}
-
 
 .p-t-5{
   padding-top: 5rem;
