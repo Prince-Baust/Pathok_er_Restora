@@ -31,6 +31,17 @@ a:hover{
 .nav-link {
   font-size: 1.2rem;
 }
+.navbar-nav > li > .dropdown-menu {
+  background-color: wheat;
+}
+.dropdown-item{
+  color: #cd6133;
+}
+
+.cust-btn{
+  color: #cd6133;
+  border-color: #cd6133;
+}
 
 /*---------------------Footer--------------------*/
 
