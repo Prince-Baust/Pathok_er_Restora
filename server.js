@@ -100,6 +100,21 @@ app.post("/the-subtle-art-of-not-giving-a-fck", function (req, res) {
     res.redirect("/the-subtle-art-of-not-giving-a-fck");
 });
 
+app.get("/the-4-hour-work-week", function (req, res) {
+    res.render("the-4-hour-work-week", {
+        styles: ['single_book.css','navbar_and_footer.css'],
+        reviews: the_4_hour_work_week_reviews});
+});
+app.post("/the-4-hour-work-week", function (req, res) {
+    const review = {
+        name: req.body.user_name,
+        email: req.body.user_email,
+        review: req.body.user_review
+    };
+    the_4_hour_work_week_reviews.push(review);
+    res.redirect("/the-4-hour-work-week");
+});
+
 app.listen(3000, function () {
     console.log("Server started at port: 3000");
 });
