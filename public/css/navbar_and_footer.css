@@ -43,6 +43,11 @@ a:hover{
   border-color: #cd6133;
 }
 
+.cust-btn:hover{
+  background-color: #cd6133;
+  color: white;
+}
+
 /*---------------------Footer--------------------*/
 
 #footer{
