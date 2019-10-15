@@ -25,7 +25,7 @@ app.get('/home', function (req, res) {
 });
 
 app.get("/single", function (req, res) {
-   res.render("single_book", {styles: ['navbar_and_footer.css']});
+   res.render("single_book", {styles: ['single_book.css','navbar_and_footer.css']});
 });
 
 app.listen(3000, function () {
