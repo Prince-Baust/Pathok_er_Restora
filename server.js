@@ -24,6 +24,10 @@ app.get('/home', function (req, res) {
    res.render("home", {styles: ['home.css', 'navbar_and_footer.css']});
 });
 
+app.get("/single", function (req, res) {
+   res.render("single_book", {styles: ['navbar_and_footer.css']});
+});
+
 app.listen(3000, function () {
     console.log("Server started at port: 3000");
 });
