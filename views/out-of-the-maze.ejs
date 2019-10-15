@@ -26,11 +26,14 @@
 
     <div class="pt-5 mt-5 ">
         <h3 class="mb-5">Reviews</h3>
-        <ul class="comment-list shadow p-3 mb-5 bg-white rounded">
+        <ul class="list-unstyled comment-list shadow p-3 mb-5 bg-white rounded">
             <li class="comment">
                 <div class="comment-body">
-                    <h3>Saimon Hossain</h3>
-                    <p>প্রগ্রামিং শেখার জন্য প্রাথমিক ক্ষেত্রে এই বই এর তুলনা নাই। খুব সহজ  ও আকর্ষনীয় করে লেখা যেন সবাই সহযেই বুঝতে পারে । আমি নিজে বইটী পড়ে অনেক উপক্রিত হইছি ,আপনিও চাইলে ট্রাই করতে পারেন । </p>
+                    <% reviews.forEach(function(review){ %>
+                        <h3><%= review.name %></h3>
+                        <p><%= review.review %></p>
+                    <% }) %>
+
                 </div>
             </li>
         </ul>
@@ -38,19 +41,19 @@
 
         <div class="comment-form-wrap pt-5">
             <h3 class="mb-5">Post Review</h3>
-            <form action="/single_book" method="post" class="p-3 p-md-5 shadow p-3 mb-5 bg-white rounded">
+            <form action="/out-of-the-maze" method="post" class="p-3 p-md-5 shadow p-3 mb-5 bg-white rounded">
                 <div class="form-group">
                     <label for="name">Name *</label>
-                    <input type="text" class="form-control" id="name">
+                    <input name="user_name" type="text" class="form-control" id="name">
                 </div>
                 <div class="form-group">
                     <label for="email">E-mail *</label>
-                    <input type="email" class="form-control" id="email">
+                    <input name="user_email" type="email" class="form-control" id="email">
                 </div>
 
                 <div class="form-group">
                     <label for="message">Review</label>
-                    <textarea name="" id="message" cols="30" rows="10" class="form-control"></textarea>
+                    <textarea name="user_review" id="message" cols="30" rows="10" class="form-control"></textarea>
                 </div>
                 <div class="form-group">
                     <button type="submit" class="btn btn-lg cust-btn"> Submit </button>
@@ -58,6 +61,5 @@
             </form>
         </div>
     </div>
-
 </div>
 <%- include("partials/footer"); %>
