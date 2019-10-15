@@ -1,5 +1,49 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const mongoose = require('mongoose');
+mongoose.set('useCreateIndex', true);
+
+mongoose.connect("mongodb://localhost:27017/pathokDB", {useUnifiedTopology: true, useNewUrlParser: true});
+
+var UserSchema = new mongoose.Schema({
+    email: {
+        type: String,
+        unique: true,
+        required: true,
+        trim: true
+    },
+    username: {
+        type: String,
+        unique: true,
+        required: true,
+        trim: true
+    },
+    password: {
+        type: String,
+        required: true,
+    }
+});
+var User = mongoose.model('User', UserSchema);
+module.exports = User;
+
+
+
+
+
+
+// const reviewSchema = new mongoose.Schema({
+//     name: String,
+//     email: String,
+//     review: String
+// });
+//
+// const Review = mongoose.model("Review", reviewSchema);
+
+// const review = new Review({
+//    name: ,
+//    email: ,
+//    review:
+// });
 
 const app = express();
 
@@ -8,6 +52,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 app.use(express.static('public'));
 
+let messages = [];
 let out_of_the_maze_reviews = [];
 let who_moved_my_cheese_reviews = [];
 let eat_that_frog_reviews = [];
@@ -33,6 +78,31 @@ app.post("/signIn", function (req, res) {
 app.get("/signup", function (req,res) {
     res.render("signUp", {styles: ['signIn.css', 'navbar_and_footer.css']});
 });
+app.post("/signup", function (req, res) {
+   // console.log(req.body.user_name);
+   // console.log(req.body.user_email);
+   // console.log(req.body.user_password);
+
+
+    if (req.body.user_email &&
+        req.body.user_name &&
+        req.body.user_password &&
+        req.body.user_conf_password) {
+        var userData = {
+            email: req.body.user_email,
+            username: req.body.user_name,
+            password: req.body.user_password,
+        };
+
+        User.create(userData, function (err, user) {
+            if (err) {
+                return next(err)
+            } else {
+                return res.redirect('/home');
+            }
+        });
+    }
+});
 
 app.get('/home', function (req, res) {
    res.render("home", {styles: ['home.css', 'navbar_and_footer.css']});
@@ -50,12 +120,27 @@ app.get('/about', function (req, res) {
    res.render("about", {styles: ['styles.css', 'about.css','navbar_and_footer.css']})
 });
 
+app.get('/contact', function (req, res) {
+    res.render("contact", {styles: ['styles.css', 'signIn.css','navbar_and_footer.css']})
+});
+app.post('/contact', function (req, res) {
+   var message = {
+       name: req.body.userName,
+       email: req.body.userEmail,
+       message: req.body.userMessage
+   };
+   messages.push(message);
+   console.log(messages);
+
+    res.json('{ success: true }');
+
+});
+
 app.get("/out-of-the-maze", function (req, res) {
    res.render("out-of-the-maze", {
        styles: ['single_book.css','navbar_and_footer.css'],
        reviews: out_of_the_maze_reviews});
 });
-
 app.post("/out-of-the-maze", function (req, res) {
    const review = {
        name: req.body.user_name,
