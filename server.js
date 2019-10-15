@@ -38,6 +38,18 @@ app.get('/home', function (req, res) {
    res.render("home", {styles: ['home.css', 'navbar_and_footer.css']});
 });
 
+app.get('/non-fiction', function (req, res) {
+   res.render("non-fiction", {styles: ['home.css', 'navbar_and_footer.css']})
+});
+
+app.get('/biography', function (req, res) {
+    res.render("biography", {styles: ['home.css', 'navbar_and_footer.css']})
+});
+
+app.get('/about', function (req, res) {
+   res.render("about", {styles: ['styles.css', 'about.css','navbar_and_footer.css']})
+});
+
 app.get("/out-of-the-maze", function (req, res) {
    res.render("out-of-the-maze", {
        styles: ['single_book.css','navbar_and_footer.css'],
