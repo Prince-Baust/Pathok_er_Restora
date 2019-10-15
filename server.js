@@ -115,6 +115,21 @@ app.post("/the-4-hour-work-week", function (req, res) {
     res.redirect("/the-4-hour-work-week");
 });
 
+app.get("/the-alchemist", function (req, res) {
+    res.render("the-alchemist", {
+        styles: ['single_book.css','navbar_and_footer.css'],
+        reviews: the_alchemist_reviews});
+});
+app.post("/the-alchemist", function (req, res) {
+    const review = {
+        name: req.body.user_name,
+        email: req.body.user_email,
+        review: req.body.user_review
+    };
+    the_alchemist_reviews.push(review);
+    res.redirect("/the-alchemist");
+});
+
 app.listen(3000, function () {
     console.log("Server started at port: 3000");
 });
