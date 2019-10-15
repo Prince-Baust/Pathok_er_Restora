@@ -8,12 +8,12 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 app.use(express.static('public'));
 
-var out_of_the_maze_reviews = [];
-var who_moved_my_cheese_reviews = [];
-var eat_that_frog_reviews = [];
-var the_4_hour_work_week_reviews = [];
-var the_alchemist_reviews = [];
-var the_subtle_art_of_not_giving_a_fck_reviews = [];
+let out_of_the_maze_reviews = [];
+let who_moved_my_cheese_reviews = [];
+let eat_that_frog_reviews = [];
+let the_4_hour_work_week_reviews = [];
+let the_alchemist_reviews = [];
+let the_subtle_art_of_not_giving_a_fck_reviews = [];
 
 app.get('/', function (req, res) {
     res.render("index", {styles: ['styles.css', 'navbar_and_footer.css']});
@@ -41,7 +41,7 @@ app.get('/home', function (req, res) {
 app.get("/out-of-the-maze", function (req, res) {
    res.render("out-of-the-maze", {
        styles: ['single_book.css','navbar_and_footer.css'],
-       out_of_the_maze_reviews: out_of_the_maze_reviews});
+       reviews: out_of_the_maze_reviews});
 });
 
 app.post("/out-of-the-maze", function (req, res) {
@@ -57,7 +57,7 @@ app.post("/out-of-the-maze", function (req, res) {
 app.get("/who-moved-my-cheese", function (req, res) {
     res.render("who-moved-my-cheese", {
         styles: ['single_book.css','navbar_and_footer.css'],
-        who_moved_my_cheese_reviews: who_moved_my_cheese_reviews});
+        reviews: who_moved_my_cheese_reviews});
 });
 
 app.post("/who-moved-my-cheese", function (req, res) {
@@ -68,6 +68,21 @@ app.post("/who-moved-my-cheese", function (req, res) {
     };
     who_moved_my_cheese_reviews.push(review);
     res.redirect("/who-moved-my-cheese");
+});
+
+app.get("/eat-that-frog", function (req, res) {
+    res.render("eat-that-frog", {
+        styles: ['single_book.css','navbar_and_footer.css'],
+        reviews: eat_that_frog_reviews});
+});
+app.post("/eat-that-frog", function (req, res) {
+    const review = {
+        name: req.body.user_name,
+        email: req.body.user_email,
+        review: req.body.user_review
+    };
+    eat_that_frog_reviews.push(review);
+    res.redirect("/eat-that-frog");
 });
 
 app.listen(3000, function () {
