@@ -5,6 +5,7 @@ const app = express();
 
 app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.json());
 app.use(express.static('public'));
 
 
@@ -14,6 +15,10 @@ app.get('/', function (req, res) {
 
 app.get("/signin", function (req,res) {
    res.render("signIn", {styles: ['signIn.css', 'navbar_and_footer.css']});
+});
+
+app.post("/signIn", function (req, res) {
+   console.log(req.body.inputEmail + " " + req.body.inputPassword);
 });
 
 app.get("/signup", function (req,res) {
