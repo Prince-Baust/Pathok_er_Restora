@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
+const bcrypt = require('bcrypt');
 mongoose.set('useCreateIndex', true);
 
 mongoose.connect("mongodb://localhost:27017/pathokDB", {useUnifiedTopology: true, useNewUrlParser: true});
@@ -23,27 +24,73 @@ var UserSchema = new mongoose.Schema({
         required: true,
     }
 });
+const reviewSchema = new mongoose.Schema({
+    name: {
+        type: String,
+        required: true
+    },
+    email: {
+        type: String,
+        required: true
+    },
+    review: {
+        type: String,
+        required: true
+    }
+});
+const contactSchema = new mongoose.Schema({
+    name: {
+        type: String,
+        required: true
+    },
+    email: {
+        type: String,
+        required: true
+    },
+    message: {
+        type: String,
+        required: true
+    }
+});
+
+//authenticate input against database
+UserSchema.statics.authenticate = function (email, password, callback) {
+    User.findOne({ email: email })
+        .exec(function (err, user) {
+            if (err) {
+                return callback(err)
+            } else if (!user) {
+                var err = new Error('User not found.');
+                err.status = 401;
+                return callback(err);
+            }
+            bcrypt.compare(password, user.password, function (err, result) {
+                if (result === true) {
+                    return callback(null, user);
+                } else {
+                    return callback();
+                }
+            })
+        });
+};
+
+//hashing a password before saving it to the database
+UserSchema.pre('save', function (next) {
+    var user = this;
+    bcrypt.hash(user.password, 10, function (err, hash){
+        if (err) {
+            return next(err);
+        }
+        user.password = hash;
+        next();
+    })
+});
+
 var User = mongoose.model('User', UserSchema);
+const Review = mongoose.model("Review", reviewSchema);
+const Message = mongoose.model("Message", contactSchema);
 module.exports = User;
 
-
-
-
-
-
-// const reviewSchema = new mongoose.Schema({
-//     name: String,
-//     email: String,
-//     review: String
-// });
-//
-// const Review = mongoose.model("Review", reviewSchema);
-
-// const review = new Review({
-//    name: ,
-//    email: ,
-//    review:
-// });
 
 const app = express();
 
@@ -67,36 +114,13 @@ app.get('/', function (req, res) {
 app.get("/signin", function (req,res) {
    res.render("signIn", {styles: ['signIn.css', 'navbar_and_footer.css']});
 });
-
-app.post("/signIn", function (req, res) {
-   const cridentials = {
-     email: req.body.inputEmail,
-     password: req.body.inputPassword
-   };
-});
-
-app.get("/signup", function (req,res) {
-    res.render("signUp", {styles: ['signIn.css', 'navbar_and_footer.css']});
-});
-app.post("/signup", function (req, res) {
-   // console.log(req.body.user_name);
-   // console.log(req.body.user_email);
-   // console.log(req.body.user_password);
-
-
-    if (req.body.user_email &&
-        req.body.user_name &&
-        req.body.user_password &&
-        req.body.user_conf_password) {
-        var userData = {
-            email: req.body.user_email,
-            username: req.body.user_name,
-            password: req.body.user_password,
-        };
-
-        User.create(userData, function (err, user) {
-            if (err) {
-                return next(err)
+app.post("/signIn", function (req, res, next) {
+    if (req.body.inputEmail && req.body.inputPassword){
+        User.authenticate(req.body.inputEmail, req.body.inputPassword, function (error, user) {
+            if (error || !user) {
+                var err = new Error('Wrong email or password.');
+                err.status = 401;
+                return next(err);
             } else {
                 return res.redirect('/home');
             }
@@ -104,18 +128,41 @@ app.post("/signup", function (req, res) {
     }
 });
 
+app.get("/signup", function (req,res) {
+    res.render("signUp", {styles: ['signIn.css', 'navbar_and_footer.css']});
+});
+app.post("/signup", function (req, res) {
+    if (req.body.user_email &&
+        req.body.user_name &&
+        req.body.user_password &&
+        req.body.user_conf_password &&
+        req.body.user_password == req.body.user_conf_password) {
+        var userData = {
+            email: req.body.user_email,
+            username: req.body.user_name,
+            password: req.body.user_password,
+        };
+        User.create(userData, function (err, user) {
+            if (err) {
+                return next(err)
+            } else {
+                return res.redirect('/home');
+            }
+        });
+    }else{
+        res.send("<h1>Passswords didn't Match!</h1>");
+    }
+});
+
 app.get('/home', function (req, res) {
    res.render("home", {styles: ['home.css', 'navbar_and_footer.css']});
 });
-
 app.get('/non-fiction', function (req, res) {
    res.render("non-fiction", {styles: ['home.css', 'navbar_and_footer.css']})
 });
-
 app.get('/biography', function (req, res) {
     res.render("biography", {styles: ['home.css', 'navbar_and_footer.css']})
 });
-
 app.get('/about', function (req, res) {
    res.render("about", {styles: ['styles.css', 'about.css','navbar_and_footer.css']})
 });
@@ -124,15 +171,13 @@ app.get('/contact', function (req, res) {
     res.render("contact", {styles: ['styles.css', 'signIn.css','navbar_and_footer.css']})
 });
 app.post('/contact', function (req, res) {
-   var message = {
-       name: req.body.userName,
-       email: req.body.userEmail,
-       message: req.body.userMessage
-   };
-   messages.push(message);
-   console.log(messages);
-
-    res.json('{ success: true }');
+    const message = new Message({
+        name: req.body.userName,
+        email: req.body.userEmail,
+        message: req.body.userMessage
+    });
+    message.save();
+    res.send("<h1>Message Succesfully Sent!</h1>")
 
 });
 
