@@ -85,6 +85,21 @@ app.post("/eat-that-frog", function (req, res) {
     res.redirect("/eat-that-frog");
 });
 
+app.get("/the-subtle-art-of-not-giving-a-fck", function (req, res) {
+    res.render("the-subtle-art-of-not-giving-a-fck", {
+        styles: ['single_book.css','navbar_and_footer.css'],
+        reviews: the_subtle_art_of_not_giving_a_fck_reviews});
+});
+app.post("/the-subtle-art-of-not-giving-a-fck", function (req, res) {
+    const review = {
+        name: req.body.user_name,
+        email: req.body.user_email,
+        review: req.body.user_review
+    };
+    the_subtle_art_of_not_giving_a_fck_reviews.push(review);
+    res.redirect("/the-subtle-art-of-not-giving-a-fck");
+});
+
 app.listen(3000, function () {
     console.log("Server started at port: 3000");
 });
